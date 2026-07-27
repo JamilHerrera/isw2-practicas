@@ -1,6 +1,6 @@
 # Práctica 1: Refactorización y Código Limpio
 
-## 1. Código Original (Legacy Code)
+## 1. Código Original
 
 ```javascript
  {
@@ -32,10 +32,6 @@
 
 
 ---
-
-## 3. Primera Fase de Refactorización (Estructura y Claridad)
-
-En esta fase se solucionan los nombres ambiguos, se extraen las constantes mágicas y se elimina el anidamiento mediante cláusulas de guarda
 
 ```typescript
 const ISV_TAX_RATE = 0.15;
@@ -84,5 +80,76 @@ function processProductSale(
   } else {
     console.log("No producto");
     return -1;
+
+---
+
+```typescript
+const ISV_TAX_RATE = 0.15;
+const SPECIAL_TAX_RATE = 0.05;
+const STANDARD_DISCOUNT_RATE = 0.10;
+
+export enum TaxCategory {
+  Standard = 1,
+  Special = 2,
+  Exempt = 0
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  stock: number;
+}
+
+/**
+ * Procesa la venta de un producto aplicando impuestos y descuentos correspondientes.
+ */
+export function processProductSale(
+  product: Product | null,
+  quantity: number,
+  applyDiscount: boolean = false,
+  taxCategory: TaxCategory = TaxCategory.Standard
+): number {
+  validateSaleInput(product, quantity);
+
+  let subtotal = product!.price * quantity;
+
+  if (applyDiscount) {
+    subtotal -= subtotal * STANDARD_DISCOUNT_RATE;
+  }
+
+  const totalAmount = subtotal + calculateTaxAmount(subtotal, taxCategory);
+
+  updateProductStock(product!, quantity);
+
+  return Number(totalAmount.toFixed(2));
+}
+
+function validateSaleInput(product: Product | null, quantity: number): void {
+  if (!product) {
+    throw new Error("El producto proporcionado no existe.");
+  }
+  if (quantity <= 0) {
+    throw new Error("La cantidad a comprar debe ser mayor a cero.");
+  }
+  if (product.stock < quantity) {
+    throw new Error(`Stock insuficiente para ${product.name}. Disponible: ${product.stock}`);
+  }
+}
+
+function calculateTaxAmount(amount: number, taxCategory: TaxCategory): number {
+  switch (taxCategory) {
+    case TaxCategory.Standard:
+      return amount * ISV_TAX_RATE;
+    case TaxCategory.Special:
+      return amount * SPECIAL_TAX_RATE;
+    default:
+      return 0;
+  }
+}
+
+function updateProductStock(product: Product, quantity: number): void {
+  product.stock -= quantity;
+}
   }
 }
