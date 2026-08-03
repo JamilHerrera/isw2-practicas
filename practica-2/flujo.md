@@ -16,3 +16,6 @@ Para el desarrollo de una aplicación web como nuestra PWA **PulpeAnalisis, la e
 1. Las aplicaciones web requieren iteraciones rápidas y correcciones inmediatas. Trunk-Based facilita que cada cambio validado se despliegue automáticamente a producción en Vercel o Netlify.
 2.  Evita acumular ramas desactualizadas durante semanas, eliminando los conflictos masivos al fusionar código.
 3.  Mantiene un historial lineal, limpio y fácil de auditar para el equipo de desarrollo.
+
+---
+*Práctica realizada para el curso de Ingeniería de Software 2.*
