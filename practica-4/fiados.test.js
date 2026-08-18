@@ -31,25 +31,24 @@ test('Calcular mora con días vencidos (> 0)', () => {
   assertEqual(resultado, 50);
 });
 
-// 2. Caso borde: Sin días vencidos
+
 test('Calcular mora con 0 días vencidos debe ser 0', () => {
   const resultado = calcularMora(500, 0);
   assertEqual(resultado, 0);
 });
 
-// 3. Caso borde: Monto 0
 test('Calcular mora con monto 0 debe ser 0', () => {
   const resultado = calcularMora(0, 10);
   assertEqual(resultado, 0);
 });
 
-// 4. Caso borde: Días negativos
+
 test('Calcular mora con días negativos debe ser 0', () => {
   const resultado = calcularMora(100, -3);
   assertEqual(resultado, 0);
 });
 
-// 5. Caso de Error (TDD RED): Monto negativo lanza error
+
 test('Lanza error si el monto es negativo', () => {
   try {
     calcularMora(-100, 5);
@@ -61,7 +60,6 @@ test('Lanza error si el monto es negativo', () => {
   }
 });
 
-// 6. Caso de Error (TDD RED): Días no numéricos lanza error
 test('Lanza error si los días no son un número', () => {
   try {
     calcularMora(100, "cinco");
