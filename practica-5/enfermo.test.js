@@ -12,14 +12,27 @@ function assertEqual(actual, esperado) {
   }
 }
 
+let pasaron = 0;
+let fallaron = 0;
+
 function test(nombre, fn) {
   try {
     fn();
+    pasaron++;
     console.log(OK + ' PASS: ' + nombre);
   } catch (e) {
+    fallaron++;
     console.error(BAD + ' FAIL: ' + nombre);
     console.error('   ' + e.message);
+    // El código de salida ES el contrato con CI: sin esta línea el proceso
+    // termina en 0 y el pipeline se pinta verde aunque el test haya fallado.
+    process.exitCode = 1;
   }
+}
+
+function resumen() {
+  console.log('');
+  console.log('--- Resultado: ' + pasaron + ' pasaron, ' + fallaron + ' fallaron ---');
 }
 
 console.log('--- Corriendo Tests de Cálculo de Totales (Práctica 5) ---');
@@ -151,3 +164,5 @@ test('Bono aplica al llegar exactamente al umbral', () => {
 test('Sin bono si el subtotal es menor al umbral', () => {
   assertEqual(calcularTotal([{ precio: 499.99, cantidad: 1 }], 'normal'), 574.99);
 });
+
+resumen();

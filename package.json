@@ -1,0 +1,13 @@
+{
+  "name": "isw2-practicas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portafolio de evidencias de Ingeniería de Software 2",
+  "scripts": {
+    "test": "node scripts/test-all.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

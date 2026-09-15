@@ -1,0 +1,79 @@
+name: CI
+
+# Se ejecuta en cada push a cualquier rama y en cada PR hacia main.
+# workflow_dispatch permite además dispararlo a mano desde la pestaña Actions.
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Si llegan varios commits seguidos a la misma rama, cancela las corridas
+# viejas y deja solo la última. Ahorra minutos y evita resultados obsoletos.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Mínimo privilegio: el pipeline solo necesita leer el código.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    strategy:
+      # No cancelar las demás versiones cuando una falla: queremos saber si el
+      # fallo es de todas o solo de una versión de Node.
+      fail-fast: false
+      matrix:
+        node-version: ['20.x', '22.x']
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          # Sin `cache: npm` a propósito: el proyecto no tiene dependencias ni
+          # package-lock.json, y la acción falla si no encuentra el lockfile.
+
+      - name: Mostrar versiones
+        run: |
+          echo "Node: $(node --version)"
+          echo "npm:  $(npm --version)"
+
+      - name: Verificar sintaxis de todos los archivos JS
+        # Chequeo estático barato: `node --check` parsea sin ejecutar.
+        # Atrapa un error de sintaxis antes de correr la suite completa.
+        run: |
+          find . -name '*.js' -not -path './node_modules/*' -print0 \
+            | xargs -0 -n1 node --check
+          echo "Sintaxis correcta en todos los archivos JS."
+
+      - name: Correr los tests (prácticas 4 y 5)
+        run: npm test
+
+  # Job puente: da UN solo nombre de check estable ("ci-ok") para exigir en
+  # branch protection. Sin esto habría que exigir cada celda de la matriz por
+  # separado, y al cambiar una versión de Node la protección quedaría colgada
+  # esperando un check que ya no existe.
+  ci-ok:
+    name: ci-ok
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: always()
+
+    steps:
+      - name: Verificar el resultado de la matriz
+        run: |
+          echo "Resultado del job test: ${{ needs.test.result }}"
+          if [ "${{ needs.test.result }}" != "success" ]; then
+            echo "::error::La matriz de tests no terminó en verde."
+            exit 1
+          fi
+          echo "Todas las versiones de Node pasaron. Pipeline verde."
