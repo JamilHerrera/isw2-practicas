@@ -11,11 +11,15 @@
 
 ## 1. El run verde
 
-![Run verde del pipeline en GitHub Actions](img/run-verde.png)
+![Run verde y limpio del pipeline en GitHub Actions](img/run-verde-2.png)
 
-Primera corrida del workflow, disparada por el push a `feature/practica-8`:
-**Success en 20 segundos**, tres jobs en verde (`Tests (Node 20.x)`,
-`Tests (Node 22.x)` y `ci-ok`).
+Corrida **#2** del workflow: **Success en 19 segundos**, cuatro jobs en verde
+(`Tests (Node 20.x)`, `Tests (Node 22.x)`, `Tests (Node 24.x)` y `ci-ok`) y
+**sin una sola anotación de warning**. Este es el estado actual del pipeline.
+
+Cómo se llegó hasta acá está en las secciones 2 y 3: el primer run también fue
+verde, pero solo porque antes arreglé un defecto que lo habría dejado verde
+para siempre, y aun así traía warnings que había que corregir.
 
 ---
 
@@ -81,6 +85,8 @@ Un pipeline que no puede ponerse rojo no es un pipeline, es un adorno.
 
 La primera corrida fue verde, pero traía **2 warnings** que sí importan:
 
+![Primer run con warnings de deprecación](img/run-verde.png)
+
 ```
 Node.js 20 is deprecated. The following actions target Node.js 20 but are
 being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4
@@ -91,6 +97,11 @@ retiren ese runtime, el pipeline falla solo. Subí ambas acciones a `@v5` y
 aproveché para alinear la matriz con lo que declara `package.json`
 (`engines: >=20`), probando en Node 20.x, 22.x y 24.x. Si decimos que
 soportamos desde Node 20, hay que probarlo en Node 20.
+
+Resultado, verificable en la corrida #2 de arriba: mismo verde, un job más de
+cobertura y la sección de *Annotations* desapareció por completo. Un pipeline
+verde con warnings es un pipeline que te está avisando con tiempo; ignorarlos
+es cómo se llega a un build roto un lunes por la mañana sin haber tocado nada.
 
 ---
 
