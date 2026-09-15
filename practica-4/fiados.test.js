@@ -7,14 +7,26 @@ function assertEqual(actual, esperado) {
   }
 }
 
+let pasaron = 0;
+let fallaron = 0;
+
 function test(nombre, fn) {
   try {
     fn();
+    pasaron++;
     console.log(`✅ PASS: ${nombre}`);
   } catch (e) {
+    fallaron++;
     console.error(`❌ FAIL: ${nombre}`);
     console.error(`   ${e.message}`);
+    // El código de salida ES el contrato con CI: sin esta línea el proceso
+    // termina en 0 y el pipeline se pinta verde aunque el test haya fallado.
+    process.exitCode = 1;
   }
+}
+
+function resumen() {
+  console.log(`\n--- Resultado: ${pasaron} pasaron, ${fallaron} fallaron ---`);
 }
 
 
@@ -70,3 +82,5 @@ test('Lanza error si los días no son un número', () => {
     }
   }
 });
+
+resumen();

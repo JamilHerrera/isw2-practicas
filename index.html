@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portafolio ISW2 · Osman Jamil Herrera Vargas</title>
+<meta name="description" content="Portafolio de evidencias de Ingeniería de Software 2">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e2e2dd;
+    --text: #1a1a18;
+    --muted: #6b6b64;
+    --accent: #2f6f4e;
+    --accent-soft: #e8f2ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14140f;
+      --surface: #1c1c18;
+      --border: #32322c;
+      --text: #ecece6;
+      --muted: #9b9b92;
+      --accent: #6cc79a;
+      --accent-soft: #1f2e27;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 28px; margin-bottom: 32px; }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0 0 6px; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 18px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .badge img { display: block; height: 20px; }
+  .repo {
+    color: var(--accent); text-decoration: none; font-size: .9rem;
+    border: 1px solid var(--border); border-radius: 999px; padding: 3px 12px;
+  }
+  .repo:hover { background: var(--accent-soft); }
+  h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); margin: 0 0 14px; }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  li a {
+    display: flex; gap: 14px; align-items: baseline;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; text-decoration: none; color: inherit;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  li a:hover { border-color: var(--accent); transform: translateX(2px); }
+  .n {
+    flex: none; font-variant-numeric: tabular-nums; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft);
+    border-radius: 6px; padding: 1px 8px; font-size: .85rem;
+  }
+  .t { font-weight: 600; }
+  .d { display: block; color: var(--muted); font-size: .88rem; font-weight: 400; margin-top: 2px; }
+  footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Portafolio de Ingeniería de Software 2</h1>
+    <p class="sub">Osman Jamil Herrera Vargas · Evidencias de prácticas</p>
+    <div class="meta">
+      <a class="badge" href="https://github.com/JamilHerrera/isw2-practicas/actions/workflows/ci.yml">
+        <img src="https://github.com/JamilHerrera/isw2-practicas/actions/workflows/ci.yml/badge.svg" alt="Estado del pipeline CI">
+      </a>
+      <a class="repo" href="https://github.com/JamilHerrera/isw2-practicas">Ver repositorio →</a>
+    </div>
+  </header>
+
+  <h2>Prácticas</h2>
+  <ol>
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/blob/main/practica-1/limpieza.md">
+      <span class="n">01</span><span class="t">Refactorización y código limpio
+      <span class="d">Nombres con intención, funciones cortas y eliminación de números mágicos.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/blob/main/practica-2/flujo.md">
+      <span class="n">02</span><span class="t">Estrategias de ramificación en Git
+      <span class="d">Comparación de flujos de trabajo y elección para el equipo.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/tree/main/practica-3">
+      <span class="n">03</span><span class="t">Refactor guiado por principios SOLID
+      <span class="d">Antes, después y notas sobre responsabilidad única.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/blob/main/practica-4/evidencia.md">
+      <span class="n">04</span><span class="t">Pruebas unitarias de la calculadora de fiados
+      <span class="d">Casos borde, validaciones y evidencia de ejecución.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/tree/main/practica-5">
+      <span class="n">05</span><span class="t">De código enfermo a código sano
+      <span class="d">Extracción de constantes y funciones, núcleo puro separado de los efectos.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/blob/main/practica-6/arquitectura.md">
+      <span class="n">06</span><span class="t">Modelo C4 del sistema
+      <span class="d">Diagrama de contenedores en Mermaid.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/blob/main/practica-7/adr-001-arquitectura.md">
+      <span class="n">07</span><span class="t">ADR-001 · Decisión de arquitectura
+      <span class="d">Cuatro opciones evaluadas y monolito modular elegido por trade-offs.</span></span></a></li>
+
+    <li><a href="https://github.com/JamilHerrera/isw2-practicas/blob/main/practica-8/evidencia.md">
+      <span class="n">08</span><span class="t">Pipeline de integración continua
+      <span class="d">Tests automáticos en cada push y PR, y esta página publicada.</span></span></a></li>
+  </ol>
+
+  <footer>
+    Publicado con GitHub Pages. Cada push a <code>main</code> ejecuta el pipeline y actualiza este sitio.
+  </footer>
+
+</div>
+</body>
+</html>
