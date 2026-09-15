@@ -29,14 +29,14 @@ jobs:
       # fallo es de todas o solo de una versión de Node.
       fail-fast: false
       matrix:
-        node-version: ['20.x', '22.x']
+        node-version: ['20.x', '22.x', '24.x']
 
     steps:
       - name: Clonar el repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Instalar Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
           # Sin `cache: npm` a propósito: el proyecto no tiene dependencias ni
