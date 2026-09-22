@@ -12,6 +12,7 @@ const path = require('node:path');
 const SUITES = [
   { nombre: 'Práctica 4 · Calculadora de fiados', archivo: 'practica-4/fiados.test.js' },
   { nombre: 'Práctica 5 · Cálculo de totales', archivo: 'practica-5/enfermo.test.js' },
+  { nombre: 'Práctica 9 · Abonos parciales (sobre fiados.js de P4)', archivo: 'practica-4/fiados-abono.test.js' },
 ];
 
 const raiz = path.resolve(__dirname, '..');

@@ -17,6 +17,7 @@
 - [x] [Práctica 6: Modelo C4 del sistema](./practica-6/arquitectura.md)
 - [x] [Práctica 7: ADR-001 · Decisión de arquitectura](./practica-7/adr-001-arquitectura.md)
 - [x] [Práctica 8: Pipeline de integración continua](./practica-8/evidencia.md)
+- [x] [Práctica 9: Feature desarrollada con IA, con dirección humana](./practica-9/bitacora.md)
 
 ## 🧪 Correr los tests localmente
 
